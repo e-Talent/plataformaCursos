@@ -8,37 +8,25 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form style="width:400px;">
-
-            <p:growl id="message"></p:growl>
-
-            <p:menuButton value="Opciones">
-
-                <p:menuitem value="1. Alta de cursos" action="altaCurso" ajax="false"></p:menuitem>
-                <p:menuitem value="2. Impartición de cursos" action="#{listaCursos.listarCursos()}" ajax="false"></p:menuitem>
-                <p:menuitem value="3. Matricular alumnos" action="#{imparticionesActivas.imparticionesActivas()}" ajax="false"></p:menuitem>
-                <p:menuitem value="4. Baja de alumnos" action="#{imparticionesActivas.darBajaAlumno()}" ajax="false"></p:menuitem> 
-                <p:menuitem value="5. Buscador de cursos" action="#{imparticionesActivas.darBajaAlumno()}" ajax="false"></p:menuitem> 
-                <p:menuitem value="6. Consulta de cursos activos" action="null" ajax="false"></p:menuitem>
-                <p:menuitem value="7. Alta usuario" action="altaUsuario" ajax="false"></p:menuitem>
-            </p:menuButton>    
-        </h:form>
-        <h:form>
-            Introduzca el nombre del curso: <h:inputText value="#{listaCursos.nombre}"/> 
-            <h:commandButton value="Buscar" action="#{listaCursos.buscador()}"/>
-        </h:form>
-        <h:form rendered="false"> 
-            <h:dataTable value="#{login.imparticionesActivas}" var="imparticion">
-                <h:column>              
-                    <f:facet name="header">Curso</f:facet> 
-                        #{imparticion.idCurso.nombre}
-                </h:column>    
-                <h:column>              
-                    <f:facet name="header">Impartición</f:facet> 
-                    #{imparticion.nombre}                     
-                </h:column>    
-            </h:dataTable> 
-        </h:form>
+        <p:panel header="Alta de Curso">  
+            <h:form>
+                <p:growl id="message"></p:growl>
+                <p:menu style="width: 99%">
+                    <p:menuitem value="1. Alta de cursos" action="altaCurso" ajax="false"></p:menuitem>
+                    <p:menuitem value="2. Impartición de cursos" action="#{listaCursos.listarCursos()}" ajax="false"></p:menuitem>
+                    <p:menuitem value="3. Matricular alumnos" action="#{imparticionesActivas.imparticionesActivas()}" ajax="false"></p:menuitem>
+                    <p:menuitem value="4. Baja de alumnos" action="#{imparticionesActivas.darBajaAlumno()}" ajax="false"></p:menuitem> 
+                    <p:menuitem value="5. Buscador de cursos" action="#{imparticionesActivas.darBajaAlumno()}" ajax="false"></p:menuitem> 
+                    <p:menuitem value="6. Consulta de cursos activos" action="null" ajax="false"></p:menuitem>
+                    <p:menuitem value="7. Alta usuario" action="altaUsuario" ajax="false"></p:menuitem>
+                </p:menu>    
+            </h:form>
+            <p:separator/>
+            <h:form>
+                Introduzca el nombre del curso: <p:inputText value="#{listaCursos.nombre}"/> 
+                <p:commandButton value="Buscar" action="#{listaCursos.buscador()}"/>
+            </h:form>           
+        </p:panel>
     </h:body>
 </html>
 
