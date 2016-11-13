@@ -5,6 +5,7 @@ import persistencia.Imparticion;
 import persistencia.Matricula;
 import persistencia.Usuario;
 import java.util.List;
+import org.primefaces.model.StreamedContent;
 import persistencia.Examen;
 
 public interface InterfazDAO {
@@ -35,4 +36,5 @@ public interface InterfazDAO {
     
     public List<Examen> cargarExamen (String idImparticion);
     
+    public StreamedContent descargarFoto(String DNI);
 }
