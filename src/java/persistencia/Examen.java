@@ -99,5 +99,5 @@ public class Examen implements Serializable {
     public String toString() {
         return "DAO.Examen[ idExamen=" + idExamen + " ]";
     }
-    
+
 }

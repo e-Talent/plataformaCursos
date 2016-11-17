@@ -1,7 +1,6 @@
 package controlador;
 
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -10,10 +9,14 @@ import persistencia.Imparticion;
 
 @ManagedBean
 @RequestScoped
+/**
+ * Clase que se encargará de guardar las nuevas implantaciones en la base de
+ * datos
+ */
 public class AgregarImparticion {
 
     @ManagedProperty("#{cDAO}")
-    private InterfazDAO iDAO;
+    private InterfazDAO iDAO;//Interfaz que proporcionará todos los métodos del controlador DAO
     private int idCurso;
     private Date fechaInicio;
     private Date fechaFin;
@@ -62,10 +65,17 @@ public class AgregarImparticion {
         this.nombre = nombre;
     }
 
+    /**
+     * Metodo que se encarga de crear un nuevo objeto imparticion y añadirle los
+     * valores recibidos desde "imparticion.xhtml". Una vez creado el objeto se 
+     * guarda en la base de datos y se nos dirigirá a menuAdmin.xhtml
+     * @return menuAdmin
+     */
     public String guardarImparticion() {
         //Creamos una impartición vacía y le damos atributos.
         Imparticion i = new Imparticion();
-        // buscarCursoID busca un objeto curso que coincida con la ID
+        // buscarCursoID busca un objeto curso que coincida con la ID que se ha 
+        //recibido de imparticion.xhtml
         i.setIdCurso(iDAO.buscarCursoID(idCurso));
         i.setFechaInicio(fechaInicio);
         i.setFechaFin(fechaFin);

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import modelo.DAO.InterfazDAO;
 import org.primefaces.model.UploadedFile;
@@ -14,14 +13,17 @@ import persistencia.Curso;
 
 @ManagedBean
 @RequestScoped
+/**
+ * Clase que se encargará de guardar un nuevo curso en la base de datos
+ */
 public class AgregarCurso {
 
-    @ManagedProperty("#{cDAO}")
-    private InterfazDAO iDAO;
+    private InterfazDAO iDAO; //Interfaz que proporcionará todos los métodos del controlador DAO
     private String urlDocumento;
     private String nombre;
     private String descripcion;
-    private UploadedFile temario;
+    private UploadedFile temario; //El temario se guarda en un objeto tipo UploadFile
+    //En la base de datos solo guardamos la ruta al archivo, no el archivo.
     private String destination = "C:\\NeatBean\\plataformaCursos\\web\\resources\\";
 
     public AgregarCurso() {
@@ -67,10 +69,18 @@ public class AgregarCurso {
         this.temario = temario;
     }
 
+    /**
+     * Metodo que se encarga de crear un nuevo objeto curso y añadirle los
+     * valores recibidos desde "altacurso.xhtml". Una vez creado el objeto se 
+     * guarda en la base de datos y se nos dirigirá a "imparticion.xhtml"
+     * @return menuAdmin
+     * @return imparticion (.xhtml a la que nos dirigimos tras ejecutar el método)
+     */
     public String guardarCurso() {
-        //Creamos un curso vacío y le damos nombre y descripción (y el documento, en los que los lleven)
+        //Creamos un objeto curso vacío y le damos nombre, descripción y el 
+        //documento, (aunque no es obligatorio).
         Curso c = new Curso();
-        urlDocumento = temario.getFileName();
+        urlDocumento = temario.getFileName(); //La URL toma el nombre del archivo que subimos
         c.setNombre(nombre);
         c.setDescripcion(descripcion);
         c.setDocumento(urlDocumento);        
@@ -79,15 +89,20 @@ public class AgregarCurso {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //A través de este método de la interfaz, mandamos los datos a la bbdd.
+        //A través de este método de la interfaz iDAO, mandamos los datos a la bbdd.
         iDAO.persist(c);
         return "imparticion";
     }
 
+    /**
+     * Método que recibe el nombre del archivo y el archivo en bytes y lo guarda
+     * en la ruta indicada (guardamos bytes)
+     * @param fileName (Nombre del archivo)
+     * @param in (Archivo en formato Stream)
+     */
     public void guardarTemario(String fileName, InputStream in) {
-
         try {
-            // write the inputStream to a FileOutputStream
+            // Pasamos de InputStream a FileOutputStream e indicamos donde se guarda
             OutputStream out = new FileOutputStream(new File(destination + fileName));
 
             int read = 0;

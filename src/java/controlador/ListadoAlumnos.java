@@ -7,24 +7,21 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import modelo.DAO.InterfazDAO;
 
-
 @ManagedBean
 @RequestScoped
+/**
+ * Clase que se encargará de recuperar una lista de alumnos
+ */
 public class ListadoAlumnos {
- 
-@ManagedProperty("#{cDAO}")   
-private InterfazDAO iDAO; 
 
-private List<Matricula> listaMatriculas = null;
-    
-     public ListadoAlumnos() {
+    @ManagedProperty("#{cDAO}")
+    private InterfazDAO iDAO;
+
+    private List<Matricula> listaMatriculas = null;
+
+    public ListadoAlumnos() {
     }
-     
-     public String listarAlumnos() {  
-     listaMatriculas = iDAO.listarMatriculas();
-     return "listadoPrueba";
-     }
-  
+
     public List<Matricula> getListaMatriculas() {
         return listaMatriculas;
     }
@@ -41,6 +38,13 @@ private List<Matricula> listaMatriculas = null;
         this.iDAO = iDAO;
     }
 
-
+    /**
+     * Método 
+     * @return 
+     */
     
+    public String listarAlumnos() {
+        listaMatriculas = iDAO.listarMatriculas();
+        return "listadoPrueba";
+    }
 }

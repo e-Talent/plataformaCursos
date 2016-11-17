@@ -9,6 +9,7 @@
     <class>persistencia.Usuario</class>
     <class>persistencia.Examen</class>
     <class>persistencia.Curso</class>
+    <class>persistencia.NewEntity</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

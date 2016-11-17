@@ -41,7 +41,13 @@ public class MatricularAlumno {
     public void setiDAO(InterfazDAO iDAO) {
         this.iDAO = iDAO;
     }
-
+    
+    /**
+     * Método con el que creamos un objeto matrícula y le introducimos el dni y 
+     * el IdImparticion para despues agregarlo a la BD.
+     * La navegación nos llevará a "menuAdmin.xhtml"
+     * @return "menuAdmin"
+     */
     public String matricular () {
     Matricula m = new Matricula();
     m.setDni(iDAO.buscarUsuarioDNI(DNI));
